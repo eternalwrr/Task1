@@ -6,7 +6,6 @@ public class ProjectArray {
   private final long arrayId;
   private final int[] digits;
 
-
   ProjectArray(long arrayId, int[] digits) throws ArrayException {
     if (digits == null) {
       throw new ArrayException("Digits array cannot be null");
@@ -22,7 +21,6 @@ public class ProjectArray {
     this.arrayId = arrayId;
     this.digits = new int[size];
   }
-
 
   public long getArrayId() {
     return arrayId;
@@ -43,7 +41,6 @@ public class ProjectArray {
     return digits[index];
   }
 
-
   public void setDigit(int index, int value) throws ArrayException {
     if (index < 0 || index >= digits.length) {
       throw new ArrayException("Index out of bounds: " + index);
@@ -53,15 +50,6 @@ public class ProjectArray {
 
   public boolean isEmpty() {
     return digits.length == 0;
-  }
-
-  public boolean contains(int value) {
-    for (int digit : digits) {
-      if (digit == value) {
-        return true;
-      }
-    }
-    return false;
   }
 
   @Override

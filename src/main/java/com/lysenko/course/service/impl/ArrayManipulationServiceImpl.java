@@ -26,7 +26,7 @@ public class ArrayManipulationServiceImpl implements ArrayManipulationService {
 
   @Override
   public int findMaxDigit(ProjectArray array) throws ArrayException {
-    if (array == null) throw new ArrayException("Array cannot be null");
+    if (array == null) throw new ArrayException("Array cannot be empty");
     if (array.isEmpty()) throw new ArrayException("Cannot find max digit in empty array");
 
     int maxDigit = array.getDigit(0);
