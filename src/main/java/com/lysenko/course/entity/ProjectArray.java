@@ -1,20 +1,30 @@
 package com.lysenko.course.entity;
 
 import com.lysenko.course.exception.ArrayException;
+import com.lysenko.course.observer.ProjectArrayObservable;
+import com.lysenko.course.observer.ProjectArrayObserver;
+import com.lysenko.course.observer.ProjectArrayEvent;
+import com.lysenko.course.observer.impl.ProjectArrayObserverImpl;
 
-public class ProjectArray {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
+public class ProjectArray implements ProjectArrayObservable {
   private final long arrayId;
-  private final int[] digits;
+  private int[] digits;
+  private final List<ProjectArrayObserver> observers = new ArrayList<>();
 
-  ProjectArray(long arrayId, int[] digits) throws ArrayException {
+  public ProjectArray(long arrayId, int[] digits) throws ArrayException {
     if (digits == null) {
       throw new ArrayException("Digits array cannot be null");
     }
     this.arrayId = arrayId;
     this.digits = digits.clone();
+    this.attach(new ProjectArrayObserverImpl());
   }
 
-  ProjectArray(long arrayId, int size) throws ArrayException {
+  public ProjectArray(long arrayId, int size) throws ArrayException {
     if (size < 0) {
       throw new ArrayException("Size cannot be negative: " + size);
     }
@@ -46,6 +56,15 @@ public class ProjectArray {
       throw new ArrayException("Index out of bounds: " + index);
     }
     digits[index] = value;
+    notifyObservers();
+  }
+
+  public void setDigits(int[] newDigits) throws ArrayException {
+    if (newDigits == null) {
+      throw new ArrayException("Digits array cannot be null");
+    }
+    this.digits = newDigits.clone();
+    notifyObservers();
   }
 
   public boolean isEmpty() {
@@ -58,18 +77,38 @@ public class ProjectArray {
     if (object == null || getClass() != object.getClass()) return false;
 
     ProjectArray that = (ProjectArray) object;
-    return arrayId == that.arrayId && java.util.Arrays.equals(digits, that.digits);
+    return arrayId == that.arrayId && Arrays.equals(digits, that.digits);
   }
 
   @Override
   public int hashCode() {
     int result = (int) (arrayId ^ (arrayId >>> 32));
-    result = 31 * result + java.util.Arrays.hashCode(digits);
+    result = 31 * result + Arrays.hashCode(digits);
     return result;
   }
 
   @Override
   public String toString() {
-    return "ProjectArray{arrayId=" + arrayId + ", digits=" + java.util.Arrays.toString(digits) + "}";
+    return "ProjectArray{arrayId=" + arrayId + ", digits=" + Arrays.toString(digits) + "}";
+  }
+
+  @Override
+  public void attach(ProjectArrayObserver observer) {
+    if (observer != null && !observers.contains(observer)) {
+      observers.add(observer);
+    }
+  }
+
+  @Override
+  public void detach(ProjectArrayObserver observer) {
+    observers.remove(observer);
+  }
+
+  @Override
+  public void notifyObservers() {
+    ProjectArrayEvent event = new ProjectArrayEvent(this);
+    for (ProjectArrayObserver observer : observers) {
+      observer.projectArrayChanged(event);
+    }
   }
 }

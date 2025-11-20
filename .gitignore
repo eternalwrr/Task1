@@ -1,10 +1,6 @@
-*
-!src/
-!pom.xml
-!.gitignore
-!README.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
+
 .idea/
 *.iml
 *.iws
@@ -17,3 +13,6 @@ target/
 .settings
 .DS_Store
 Thumbs.db
+*.log
+tmp/
+temp/
