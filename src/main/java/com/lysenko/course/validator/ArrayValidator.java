@@ -1,4 +1,4 @@
-package com.lysenko.course.fileswork;
+package com.lysenko.course.validator;
 
 public interface ArrayValidator {
   boolean isValid(String fileContent);

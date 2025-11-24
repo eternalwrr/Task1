@@ -1,9 +1,7 @@
-
-//Доделать: разделить парсер, ридер и валидатор в разные пакеты
-package com.lysenko.course.fileswork.impl;
+package com.lysenko.course.reader.impl;
 
 import com.lysenko.course.exception.ArrayException;
-import com.lysenko.course.fileswork.ArrayReader;
+import com.lysenko.course.reader.ArrayReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,20 +12,22 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class ArrayReaderImpl implements ArrayReader {
-  private static final Logger logger = LogManager.getLogger(ArrayReaderImpl.class);
+  private static final Logger logger = LogManager.getLogger();
 
   @Override
-  public List<String> readFromFile(String filePath) throws ArrayException {  // Изменено на readFromFile
+  public List<String> readFromFile(String filePath) throws ArrayException {
     logger.info("Reading file: {}", filePath);
 
     try {
       Path path = Paths.get(filePath);
 
       if (!Files.exists(path)) {
+        logger.error("File does not exist: {}", filePath);
         throw new ArrayException("File does not exist: " + filePath);
       }
 
       if (!Files.isReadable(path)) {
+        logger.error("File is not readable: {}", filePath);
         throw new ArrayException("File is not readable: " + filePath);
       }
 
@@ -36,6 +36,7 @@ public class ArrayReaderImpl implements ArrayReader {
       return lines;
 
     } catch (IOException e) {
+      logger.error("Error reading file: {}", filePath, e);
       throw new ArrayException("Error reading file: " + filePath, e);
     }
   }

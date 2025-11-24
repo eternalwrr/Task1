@@ -1,5 +1,4 @@
-package com.lysenko.course.fileswork;
-
+package com.lysenko.course.reader;
 import com.lysenko.course.exception.ArrayException;
 import java.util.List;
 

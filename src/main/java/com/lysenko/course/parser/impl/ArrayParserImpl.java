@@ -1,5 +1,5 @@
-package com.lysenko.course.fileswork.impl;
-import com.lysenko.course.fileswork.ArrayParser;
+package com.lysenko.course.parser.impl;
+import com.lysenko.course.parser.ArrayParser;
 import java.util.Arrays;
 
 public class ArrayParserImpl implements ArrayParser {
