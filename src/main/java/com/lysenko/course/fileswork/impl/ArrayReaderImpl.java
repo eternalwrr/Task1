@@ -1,3 +1,5 @@
+
+//Доделать: разделить парсер, ридер и валидатор в разные пакеты
 package com.lysenko.course.fileswork.impl;
 
 import com.lysenko.course.exception.ArrayException;

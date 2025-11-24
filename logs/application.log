@@ -1,0 +1,4 @@
+2025-11-21 12:43:55.970 [main] INFO  com.lysenko.course.observer.impl.ProjectArrayObserverImpl - Observer received update for ProjectArray id=1
+2025-11-21 12:43:55.973 [main] INFO  com.lysenko.course.observer.impl.ProjectArrayObserverImpl - Updated parameters for array id=1 -> min=-1, max=999, sum=1014, average=169.0
+2025-11-21 12:43:55.973 [main] INFO  com.lysenko.course.observer.impl.ProjectArrayObserverImpl - Observer received update for ProjectArray id=1
+2025-11-21 12:43:55.974 [main] INFO  com.lysenko.course.observer.impl.ProjectArrayObserverImpl - Updated parameters for array id=1 -> min=0, max=999, sum=2014, average=335.6666666666667

@@ -13,6 +13,14 @@ target/
 .settings
 .DS_Store
 Thumbs.db
+
 *.log
+
+
+!logs/
+logs/*
+!logs/application.log
+!logs/app.log
+
 tmp/
 temp/
